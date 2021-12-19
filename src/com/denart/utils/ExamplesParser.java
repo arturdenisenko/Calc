@@ -1,5 +1,6 @@
 package com.denart.utils;
 
+import com.denart.exceptions.CalcException;
 import com.denart.model.Arabic;
 import com.denart.model.Operator;
 import com.denart.model.Roman;
@@ -11,10 +12,10 @@ import java.util.List;
 public class ExamplesParser {
     static List<Symbol> symbolList = new ArrayList<>();
 
-    public static void parseExampleToCharArray(String example) {
+    public static String parseExample(String example) {
         example = WDeleter.deleteAllW(example);
         convertToSymbolsList(example);
-        CalculateUtil.calculate(symbolList);
+        return CalculateUtil.calculate(symbolList);
     }
 
     private static void convertToSymbolsList(String example) {
@@ -53,7 +54,7 @@ public class ExamplesParser {
             }
             convertSymbolsListToArabic();
         } else {
-            throw new IllegalArgumentException();
+            throw new CalcException("Bad expression format", example);
         }
 
     }

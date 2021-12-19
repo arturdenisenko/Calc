@@ -9,16 +9,19 @@ import java.io.InputStreamReader;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
-        System.out.println("Hello this calc program, write your example here. ");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String input;
-        try {
+        String input = "";
+        while (true) {
             input = br.readLine();
-            ExamplesParser.parseExampleToCharArray(input);
-        } catch (IOException e) {
-            e.printStackTrace();
+            if (input.length() < 2) {
+                System.out.println("Неверная команда.");
+            } else if (input.length() > 2) {
+                System.out.println(ExamplesParser.parseExample(input));
+            } else if ("exit".equals(input)) {
+                return;
+            }
         }
-        br.close();
+
     }
+    ///br.close();
 }
